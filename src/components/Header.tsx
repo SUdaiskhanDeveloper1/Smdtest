@@ -5,65 +5,98 @@ import b from "../assets/b.png";
 
 const { Text } = Typography;
 
+
+const clamp = (min: number, preferred: string, max: number): string => {
+  return `clamp(${min}px, ${preferred}, ${max}px)`;
+};
+
 const Header: React.FC = () => {
   return (
-    <Row
-      justify="space-between"
-      align="middle"
+    <div
       style={{
-        background: "white",
-        padding: "0.8rem 1rem",
-        marginBottom: "0.5rem",
+        width: "100vw",
+        maxWidth: "100%",
+        padding: "0 clamp(0.5rem, 2vw, 1rem)",
       }}
     >
-      <Col>
-        <Space align="center" size={6}>
-          <img
-            src={a}
-            alt="Logo"
-            style={{
-              width: "clamp(30px, 4vw, 40px)",
-              height: "clamp(30px, 4vw, 40px)",
-              borderRadius: 6,
-              objectFit: "cover",
-            }}
-          />
-          <Space align="center" size={4}>
+      <Row
+        justify="space-between"
+        align="middle"
+        style={{
+          background: "white",
+          padding: "clamp(0.6rem, 1.5vh, 1rem)",
+          marginBottom: "clamp(0.3rem, 1vh, 0.5rem)",
+          borderRadius: "8px",
+          boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+        }}
+      >
+        <Col>
+          <Space style={{ gap: clamp(4, "1vw", 8) }}>
             <img
-              src={b}
-              alt="Weather Icon"
+              src={a}
+              alt="Logo"
               style={{
-                width: "clamp(35px, 5vw, 50px)",
-                height: "clamp(30px, 4vw, 40px)",
+                width: "clamp(28px, 4vw, 38px)",
+                height: "clamp(28px, 4vw, 38px)",
                 borderRadius: 6,
                 objectFit: "cover",
               }}
             />
+            <Space style={{ gap: clamp(3, "0.8vw", 6) }}>
+              <img
+                src={b}
+                alt="Weather Icon"
+                style={{
+                  width: "clamp(32px, 5vw, 48px)",
+                  height: "clamp(28px, 4vw, 38px)",
+                  borderRadius: 6,
+                  objectFit: "cover",
+                }}
+              />
+            </Space>
+            <Text
+              style={{
+                fontSize: "clamp(14px, 2vw, 18px)",
+                marginLeft: "clamp(4px, 1vw, 8px)",
+                color: "black",
+                fontWeight: "bold",
+              }}
+            >
+              Weatherwalay
+            </Text>
           </Space>
-          <Text
+        </Col>
+        <Col>
+          <Space
+            direction="vertical"
             style={{
-              fontSize: "clamp(12px, 1.5vw, 15px)",
-              marginLeft: 6,
-              color: "black",
-              fontWeight: "bold",
+              lineHeight: 1.2,
+              gap: 0,
             }}
           >
-            Weatherwalay
-          </Text>
-        </Space>
-      </Col>
-      <Col>
-        <Space direction="vertical" align="end" size={0} style={{ lineHeight: 1 }}>
-          <Text style={{ fontSize: "clamp(11px, 1vw, 13px)", color: "black", fontWeight: 500 }}>
-            11:30 AM
-          </Text>
-          <Text style={{ fontSize: "clamp(10px, 1vw, 12px)", color: "black", fontWeight: 500 }}>
-            02 Sep
-          </Text>
-        </Space>
-      </Col>
-    </Row>
+            <Text
+              style={{
+                fontSize: "clamp(12px, 1.5vw, 14px)",
+                color: "black",
+                fontWeight: 500,
+              }}
+            >
+              11:30 AM
+            </Text>
+            <Text
+              style={{
+                fontSize: "clamp(11px, 1.3vw, 13px)",
+                color: "black",
+                fontWeight: 500,
+              }}
+            >
+              02 Sep
+            </Text>
+          </Space>
+        </Col>
+      </Row>
+    </div>
   );
 };
-//checking okkkk bugs coming 
+
 export default Header;

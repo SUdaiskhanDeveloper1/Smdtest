@@ -22,19 +22,24 @@ interface WeatherCardProps {
   parameters: Parameter[];
 }
 
+
+const responsiveSize = (min: number, preferred: string, max: number): string => {
+  return `clamp(${min}px, ${preferred}, ${max}px)`;
+};
+
 const iconMapper: Record<string, JSX.Element> = {
   sun: (
     <IoIosSunny
-      style={{ fontSize: "clamp(32px, 5vw, 45px)", color: "#faad14" }}
+      style={{ fontSize: responsiveSize(24, "3vw", 40), color: "#faad14" }}
     />
   ),
   rain: (
     <BsCloudRain
-      style={{ fontSize: "clamp(28px, 4vw, 40px)", color: "#fff" }}
+      style={{ fontSize: responsiveSize(22, "2.8vw", 36), color: "#fff" }}
     />
   ),
   fog: (
-    <BsCloudFog style={{ fontSize: "clamp(28px, 4vw, 40px)", color: "#fff" }} />
+    <BsCloudFog style={{ fontSize: responsiveSize(22, "2.8vw", 36), color: "#fff" }} />
   ),
 };
 
@@ -48,9 +53,12 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
   return (
     <div
       style={{
-        width: "100%",
-        marginBottom: "1rem",
+        width: "100vw",
+        maxWidth: "100%",
+        margin: "0",
+        marginBottom: responsiveSize(8, "1.5vh", 16),
         boxSizing: "border-box",
+        padding: `0 ${responsiveSize(8, "2vw", 16)}`,
       }}
     >
      
@@ -58,26 +66,30 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
         style={{
           background: "#000E2A",
           color: "#fff",
-          padding: "1rem",
+          padding: responsiveSize(12, "2vh", 20),
           borderRadius: "12px 12px 0 0",
           boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
+          minHeight: responsiveSize(80, "12vh", 120),
+          display: "flex",
+          alignItems: "center",
         }}
       >
-        <Row align="middle" justify="space-between">
-          <Col xs={12}>
+        <Row align="middle" justify="space-between" style={{ width: "100%" }}>
+          <Col xs={12} sm={14}>
             <Text
               strong
               style={{
-                fontSize: "clamp(16px, 2vw, 25px)",
+                fontSize: responsiveSize(14, "2vw", 22),
                 color: "#fff",
+                display: "block",
+                marginBottom: responsiveSize(4, "0.5vh", 8),
               }}
             >
               {stationName}
             </Text>
-            <br />
             <Text
               style={{
-                fontSize: "clamp(14px, 1.5vw, 20px)",
+                fontSize: responsiveSize(12, "1.5vw", 18),
                 color: "#fff",
               }}
             >
@@ -87,6 +99,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
 
           <Col
             xs={12}
+            sm={10}
             style={{
               display: "flex",
               flexDirection: "column",
@@ -94,14 +107,15 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
               justifyContent: "center",
             }}
           >
-            <span style={{ fontSize: "clamp(24px, 3vw, 42px)" }}>
+            <span style={{ fontSize: responsiveSize(20, "4vw", 38) }}>
               {iconMapper[conditionIconsvg] || <IoIosSunny />}
             </span>
             <Text
               strong
               style={{
-                fontSize: "clamp(12px, 1.2vw, 16px)",
+                fontSize: responsiveSize(11, "1.2vw", 15),
                 color: "white",
+                textAlign: "right",
               }}
             >
               {conditionName}
@@ -115,13 +129,20 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
         <div
           style={{
             background: "#D9E6FF",
-            padding: "0.8rem 1rem",
+            padding: `${responsiveSize(10, "1.5vh", 16)} ${responsiveSize(12, "2vw", 20)}`,
             borderRadius: "0 0 12px 12px",
-            fontSize: "clamp(12px, 1vw, 16px)",
+            fontSize: responsiveSize(11, "1vw", 14),
             boxShadow: "0 2px 6px rgba(98, 50, 50, 0.1)",
+            minHeight: responsiveSize(60, "8vh", 80),
+            display: "flex",
+            alignItems: "center",
           }}
         >
-          <Row justify="space-between" align="middle">
+          <Row 
+            justify="space-between" 
+            align="middle" 
+            style={{ width: "100%" }}
+          >
             {parameters.map((param, i) => {
               const isFeelsLike = param.label.toLowerCase().includes("feel");
 
@@ -129,27 +150,34 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
                 <Col
                   key={i}
                   style={{
-                    textAlign: isFeelsLike ? "center" : "left", 
-                    width: isFeelsLike ? "100%" : "auto",
+                    textAlign: isFeelsLike ? "center" : "left",
+                    flex: isFeelsLike ? "1 0 100%" : "0 1 auto",
+                    marginBottom: isFeelsLike ? responsiveSize(4, "1vh", 8) : "0",
                   }}
                 >
-                 
                   <Row align="middle" gutter={6} wrap={false}>
                     <Col>
                       {param.icon === "eye" && (
-                        <PiEyeBold style={{ color: "#ff4d4f", fontSize: 22 }} />
+                        <PiEyeBold style={{ 
+                          color: "#ff4d4f", 
+                          fontSize: responsiveSize(18, "2vw", 22)
+                        }} />
                       )}
                       {param.icon === "wind" && (
                         <RiSpeedUpLine
-                          style={{ color: "#ff4d4f", fontSize: 22 }}
+                          style={{ 
+                            color: "#ff4d4f", 
+                            fontSize: responsiveSize(18, "2vw", 22)
+                          }}
                         />
                       )}
                     </Col>
                     <Col>
                       <Text
                         style={{
-                          fontSize: "clamp(16px, 1.5vw, 20px)",
+                          fontSize: responsiveSize(13, "1.5vw", 18),
                           color: isFeelsLike ? "blue" : "#FF3F3F",
+                          whiteSpace: "nowrap",
                         }}
                       >
                         {param.label}: {param.value} {param.unit}

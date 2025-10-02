@@ -1,67 +1,116 @@
 import React from "react";
-import { Row, Col } from "antd";
-import { IoIosSunny } from "react-icons/io";
-import { BsCloudRain, BsCloudFog } from "react-icons/bs";
-import WeatherCard from "../components/WeatherCard";
-import Header from "../components/Header";
+import { Card, Row, Col, Typography } from "antd";
 
-const WeatherApp: React.FC = () => {
+const { Text } = Typography;
+
+interface WeatherCardProps {
+  location: string;
+  distance: string;
+  icon: React.ReactNode;
+  condition: string;
+  visibility?: string;
+  windSpeed?: string;
+  feelsLike?: string;
+  centerFeels?: boolean;
+}
+
+const WeatherCard: React.FC<WeatherCardProps> = ({
+  location,
+  distance,
+  icon,
+  condition,
+  visibility,
+  windSpeed,
+  feelsLike,
+  centerFeels = false,
+}) => {
   return (
     <div
       style={{
-        height: "100vh",
-
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        padding: "16px",
+        width: "100vw",
+        maxWidth: "100%",
+        padding: "0 clamp(0.5rem, 2vw, 1rem)",
+        marginBottom: "clamp(0.3rem, 1vh, 0.5rem)",
       }}
     >
-      <Row justify="center" style={{ width: "100%", margin: 0 }}>
-        <Col
-          xs={24}
-          sm={20}
-          md={16}
-          lg={10}
-          xl={8}
-          style={{
-            padding: "8px",
-
-            maxHeight: "95vh",
-          }}
-        >
-          <Header />
-
-          <WeatherCard
-            location="SIAL-M"
-            distance="220 km"
-            icon={<BsCloudFog style={{ fontSize: 32, color: "#fff" }} />}
-            condition="Dense fog"
-            visibility="Low Visibility"
-            windSpeed="45-60"
-          />
-
-          <WeatherCard
-            location="KLR-K"
-            distance="195 km"
-            icon={<BsCloudRain style={{ fontSize: 32, color: "white" }} />}
-            condition="Very Heavy Rain with Winds"
-            feelsLike="34°C"
-            centerFeels={true}
-          />
-
-          <WeatherCard
-            location="BHERA"
-            distance="120 km"
-            icon={<IoIosSunny style={{ fontSize: 42, color: "#faad14" }} />}
-            condition="Sunny"
-            feelsLike="40°C"
-            centerFeels={true}
-          />
-        </Col>
-      </Row>
+      <Card
+        style={{
+          width: "100%",
+          background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          color: "white",
+          borderRadius: 12,
+          minHeight: "clamp(70px, 10vh, 100px)",
+        }}
+        bodyStyle={{ 
+          padding: "clamp(0.6rem, 1.5vh, 1rem)",
+          display: "flex",
+          alignItems: "center"
+        }}
+      >
+        <Row justify="space-between" align="middle" style={{ width: "100%" }}>
+          <Col xs={8} sm={6}>
+            <Text style={{ 
+              color: "white", 
+              fontSize: "clamp(14px, 2vw, 18px)", 
+              fontWeight: "bold",
+              display: "block",
+              marginBottom: "clamp(0.1rem, 0.5vh, 0.3rem)"
+            }}>
+              {location}
+            </Text>
+            <Text style={{ 
+              color: "white", 
+              display: "block", 
+              fontSize: "clamp(10px, 1.2vw, 12px)" 
+            }}>
+              {distance}
+            </Text>
+          </Col>
+          
+          <Col xs={8} sm={6} style={{ textAlign: "center" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+              {React.cloneElement(icon as React.ReactElement, {
+                style: { fontSize: "clamp(20px, 3vw, 30px)" }
+              })}
+              <Text style={{ 
+                color: "white", 
+                marginLeft: "clamp(4px, 1vw, 8px)", 
+                fontSize: "clamp(11px, 1.3vw, 14px)" 
+              }}>
+                {condition}
+              </Text>
+            </div>
+          </Col>
+          
+          <Col xs={8} sm={12} style={{ textAlign: "right" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "clamp(0.1rem, 0.5vh, 0.3rem)" }}>
+              {visibility && (
+                <Text style={{ color: "white", fontSize: "clamp(10px, 1.2vw, 12px)" }}>
+                  Visibility: {visibility}
+                </Text>
+              )}
+              {windSpeed && (
+                <Text style={{ color: "white", fontSize: "clamp(10px, 1.2vw, 12px)" }}>
+                  Wind: {windSpeed} km/h
+                </Text>
+              )}
+              {feelsLike && (
+                <Text
+                  style={{
+                    color: "white",
+                    fontSize: "clamp(10px, 1.2vw, 12px)",
+                    textAlign: centerFeels ? "center" : "right",
+                  }}
+                >
+                  Feels like: {feelsLike}
+                </Text>
+              )}
+            </div>
+          </Col>
+        </Row>
+      </Card>
     </div>
   );
 };
 
-export default WeatherApp;
+export default WeatherCard;
