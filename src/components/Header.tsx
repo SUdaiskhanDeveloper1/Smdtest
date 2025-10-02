@@ -25,7 +25,7 @@ const Header: React.FC = () => {
         style={{
           background: "white",
           padding: "clamp(0.6rem, 1.5vh, 1rem)",
-          marginBottom: "clamp(0.3rem, 1vh, 0.5rem)",
+          marginBottom: "clamp(0.99rem, 1vh, 0.5rem)",
           borderRadius: "8px",
           boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
         }}
