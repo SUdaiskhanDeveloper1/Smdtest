@@ -1,10 +1,9 @@
 import React from "react";
 import { Row, Col, Typography, Space } from "antd";
 import a from "../assets/a.png";
-import b from "../assets/b.png";
+import c from "../assets/c.svg";
 
 const { Text } = Typography;
-
 
 const clamp = (min: number, preferred: string, max: number): string => {
   return `clamp(${min}px, ${preferred}, ${max}px)`;
@@ -31,39 +30,26 @@ const Header: React.FC = () => {
         }}
       >
         <Col>
-          <Space style={{ gap: clamp(4, "1vw", 8) }}>
+          <Space style={{ gap: clamp(12, "2vw", 34) }}>
             <img
               src={a}
               alt="Logo"
               style={{
-                width: "clamp(28px, 4vw, 38px)",
-                height: "clamp(28px, 4vw, 38px)",
+                height: "clamp(78px, 4vw, 38px)",
                 borderRadius: 6,
-                objectFit: "cover",
+                objectFit: "inherit",
               }}
             />
-            <Space style={{ gap: clamp(3, "0.8vw", 6) }}>
-              <img
-                src={b}
-                alt="Weather Icon"
-                style={{
-                  width: "clamp(32px, 5vw, 48px)",
-                  height: "clamp(28px, 4vw, 38px)",
-                  borderRadius: 6,
-                  objectFit: "cover",
-                }}
-              />
-            </Space>
-            <Text
+            <img
+              src={c}
+              alt="Logo"
               style={{
-                fontSize: "clamp(14px, 2vw, 18px)",
-                marginLeft: "clamp(4px, 1vw, 8px)",
-                color: "black",
-                fontWeight: "bold",
+                width: "clamp(280px, 20vw, 298px)",
+
+                borderRadius: 6,
+                objectFit: "fill",
               }}
-            >
-              Weatherwalay
-            </Text>
+            />
           </Space>
         </Col>
         <Col>
