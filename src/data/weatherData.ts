@@ -8,7 +8,7 @@ export const weatherData = [
     conditionIconjson: "",
     pictocode: "foggy",
     parameters: [
-      { label: "Visibility", value: "Low Visibility", icon: "eye", unit: "" },
+      { label: "Visibility", value: "Low Visibility (3-Broken Lines)", icon: "eye", unit: "" },
       { label: "Wind Speed", value: "45-60", icon: "wind", unit: "km/h" },
     ],
   },
