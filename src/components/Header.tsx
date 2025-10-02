@@ -58,12 +58,12 @@ const Header: React.FC = () => {
             04:23 PM
           </Text>
           <Text style={{ fontSize: "clamp(10px, 1vw, 12px)", color: "black", fontWeight: 500 }}>
-            26 Sep
+            02 Oct
           </Text>
         </Space>
       </Col>
     </Row>
   );
 };
-//checking okkkk
+//checking okkkk bugs coming 
 export default Header;
