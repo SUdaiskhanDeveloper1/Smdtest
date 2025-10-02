@@ -33,7 +33,7 @@ export const weatherData = [
     conditionIconjson: "",
     pictocode: "sunny",
     parameters: [
-      { label: "Feels Like", value: "40", icon: "temp", unit: "°C" },
+      { label: "Feels Like", value: "50", icon: "temp", unit: "°C" },
     ],
   },
 ];

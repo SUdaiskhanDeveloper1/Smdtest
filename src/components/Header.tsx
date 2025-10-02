@@ -55,10 +55,10 @@ const Header: React.FC = () => {
       <Col>
         <Space direction="vertical" align="end" size={0} style={{ lineHeight: 1 }}>
           <Text style={{ fontSize: "clamp(11px, 1vw, 13px)", color: "black", fontWeight: 500 }}>
-            04:23 PM
+            11:30 AM
           </Text>
           <Text style={{ fontSize: "clamp(10px, 1vw, 12px)", color: "black", fontWeight: 500 }}>
-            02 Oct
+            02 Sep
           </Text>
         </Space>
       </Col>
