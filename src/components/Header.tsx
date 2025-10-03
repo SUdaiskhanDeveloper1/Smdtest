@@ -15,6 +15,8 @@ const Header: React.FC = () => {
       style={{
         width: "100vw",
         maxWidth: "100%",
+        minHeight: "10vw",
+        maxHeight: "100%",
         padding: "0 clamp(0.5rem, 2vw, 1rem)",
       }}
     >
@@ -56,7 +58,7 @@ const Header: React.FC = () => {
           <Space
             direction="vertical"
             style={{
-              lineHeight: 1.2,
+              lineHeight: 1,
               gap: 0,
             }}
           >

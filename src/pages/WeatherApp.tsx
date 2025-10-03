@@ -29,6 +29,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
       style={{
         width: "100vw",
         maxWidth: "100%",
+
         padding: "0 clamp(0.5rem, 2vw, 1rem)",
         marginBottom: "clamp(0.3rem, 1vh, 0.5rem)",
       }}
@@ -36,10 +37,11 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
       <Card
         style={{
           width: "100%",
+          height: "100%",
           background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
           color: "white",
           borderRadius: 12,
-          minHeight: "clamp(70px, 10vh, 100px)",
+          // minHeight: "clamp(70px, 10vh, 100px)",
         }}
         bodyStyle={{ 
           padding: "clamp(0.6rem, 1.5vh, 1rem)",
@@ -47,7 +49,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
           alignItems: "center"
         }}
       >
-        <Row justify="space-between" align="middle" style={{ width: "100%" }}>
+        <Row justify="space-between" align="middle" style={{ width: "100%", height: "100%" }}>
           <Col xs={8} sm={6}>
             <Text style={{ 
               color: "white", 

@@ -55,10 +55,11 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
       style={{
         width: "100vw",
         maxWidth: "100%",
+        minHeight:"10vw",
         margin: "0",
         marginBottom: responsiveSize(4, "1.5vh", 16),
         boxSizing: "border-box",
-        padding: `0 ${responsiveSize(8, "2vw", 16)}`,
+        padding: `0 ${responsiveSize(5, "1.5vw", 12)}`,
       }}
     >
      
