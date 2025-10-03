@@ -16,7 +16,7 @@ const Header: React.FC = () => {
         width: "100vw",
         maxWidth: "100%",
         minHeight: "10vw",
-        maxHeight: "100%",
+        maxHeight: "130%",
         padding: "0 clamp(0.5rem, 2vw, 1rem)",
       }}
     >
@@ -64,7 +64,7 @@ const Header: React.FC = () => {
           >
             <Text
               style={{
-                fontSize: "clamp(12px, 1.5vw, 14px)",
+                fontSize: "clamp(12px, 1.3vw, 10px)",
                 color: "black",
                 fontWeight: 500,
               }}
@@ -73,7 +73,7 @@ const Header: React.FC = () => {
             </Text>
             <Text
               style={{
-                fontSize: "clamp(11px, 1.3vw, 13px)",
+                fontSize: "clamp(11px, 1.3vw, 10px)",
                 color: "black",
                 fontWeight: 500,
               }}

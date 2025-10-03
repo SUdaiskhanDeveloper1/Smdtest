@@ -29,7 +29,6 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
       style={{
         width: "100vw",
         maxWidth: "100%",
-
         padding: "0 clamp(0.5rem, 2vw, 1rem)",
         marginBottom: "clamp(0.3rem, 1vh, 0.5rem)",
       }}
