@@ -1,9 +1,8 @@
-
 import React from "react";
 import Header from "./components/Header";
 import WeatherList from "./components/WeatherList";
 
-const App: React.FC = () => {
+const WeatherApp: React.FC = () => {
   return (
     <div
       style={{
@@ -11,33 +10,16 @@ const App: React.FC = () => {
         height: "100vh",
         background: "#FFFFFF",
         display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        flexDirection: "column",
+        padding: "3vh 3vw",
         boxSizing: "border-box",
         overflowY: "auto",
       }}
     >
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          background: "white",
-          padding: "1rem",
-          boxSizing: "border-box",
-        }}
-      >
-        <Header />
-        <WeatherList />
-      </div>
+      <Header />
+      <WeatherList />
     </div>
   );
 };
 
-export default App;
-
-
-
-
-
-
-
+export default WeatherApp;

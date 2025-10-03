@@ -1,193 +1,178 @@
 import React from "react";
-import { Row, Col, Typography } from "antd";
-import { RiSpeedUpLine } from "react-icons/ri";
+import { Row, Col, Typography, Space } from "antd";
 import { PiEyeBold } from "react-icons/pi";
-import { IoIosSunny } from "react-icons/io";
-import { BsCloudRain, BsCloudFog } from "react-icons/bs";
+import { RiSpeedUpLine } from "react-icons/ri";
 
 const { Text } = Typography;
 
-interface Parameter {
-  label: string;
-  value: string;
-  icon: string;
-  unit: string;
-}
-
 interface WeatherCardProps {
-  stationName: string;
+  location: string;
   distance: string;
-  conditionName: string;
-  conditionIconsvg: string;
-  parameters: Parameter[];
+  icon: React.ReactNode;
+  condition: string;
+  visibility?: string;
+  windSpeed?: string;
+  feelsLike?: string;
+  centerFeels?: boolean;
 }
-
-
-const responsiveSize = (min: number, preferred: string, max: number): string => {
-  return `clamp(${min}px, ${preferred}, ${max}px)`;
-};
-
-const iconMapper: Record<string, JSX.Element> = {
-  sun: (
-    <IoIosSunny
-      style={{ fontSize: responsiveSize(24, "3vw", 40), color: "#faad14" }}
-    />
-  ),
-  rain: (
-    <BsCloudRain
-      style={{ fontSize: responsiveSize(22, "2.8vw", 36), color: "#fff" }}
-    />
-  ),
-  fog: (
-    <BsCloudFog style={{ fontSize: responsiveSize(22, "2.8vw", 36), color: "#fff" }} />
-  ),
-};
 
 const WeatherCard: React.FC<WeatherCardProps> = ({
-  stationName,
+  location,
   distance,
-  conditionName,
-  conditionIconsvg,
-  parameters,
+  icon,
+  condition,
+  visibility,
+  windSpeed,
+  feelsLike,
+  centerFeels = false,
 }) => {
   return (
     <div
       style={{
-        width: "100vw",
-        maxWidth: "100%",
-        minHeight:"10vw",
-        margin: "0",
-        marginBottom: responsiveSize(4, "1.5vh", 16),
-        boxSizing: "border-box",
-        padding: `0 ${responsiveSize(5, "1.5vw", 12)}`,
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        marginBottom: "2vh",
       }}
     >
-     
+      
       <div
         style={{
           background: "#000E2A",
           color: "#fff",
-          padding: responsiveSize(12, "2vh", 20),
-          borderRadius: "12px 12px 0 0",
-          boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
-          minHeight: responsiveSize(80, "12vh", 120),
-          display: "flex",
-          alignItems: "center",
+          padding: "3vh 3vw",
+          borderRadius: "1rem 1rem 0 0",
+          flex: 1,
         }}
       >
-        <Row align="middle" justify="space-between" style={{ width: "100%" }}>
-          <Col xs={12} sm={14}>
-            <Text
-              strong
-              style={{
-                fontSize: responsiveSize(14, "2vw", 22),
-                color: "#fff",
-                display: "block",
-                marginBottom: responsiveSize(4, "0.5vh", 8),
-              }}
-            >
-              {stationName}
-            </Text>
-            <Text
-              style={{
-                fontSize: responsiveSize(12, "1.5vw", 18),
-                color: "#fff",
-              }}
-            >
-              {distance}
-            </Text>
+        <Row align="middle" justify="space-between" style={{ height: "100%" }}>
+          <Col>
+            <Space direction="vertical" size={4}>
+              <Text
+                strong
+                style={{ fontSize: "clamp(3vh, 3.5vw, 5vh)", color: "#fff" }}
+              >
+                {location}
+              </Text>
+              <Text
+                style={{ fontSize: "clamp(2.5vh, 3vw, 4.5vh)", color: "#fff" }}
+              >
+                {distance}
+              </Text>
+            </Space>
           </Col>
-
-          <Col
-            xs={12}
-            sm={10}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-end",
-              justifyContent: "center",
-            }}
-          >
-            <span style={{ fontSize: responsiveSize(20, "4vw", 38) }}>
-              {iconMapper[conditionIconsvg] || <IoIosSunny />}
-            </span>
-            <Text
-              strong
-              style={{
-                fontSize: responsiveSize(11, "1.2vw", 15),
-                color: "white",
-                textAlign: "right",
-              }}
-            >
-              {conditionName}
-            </Text>
+          <Col style={{ textAlign: "right" }}>
+            <Space direction="vertical" align="end" size={2}>
+              <span style={{ fontSize: "clamp(5vh, 6vw, 8vh)" }}>{icon}</span>
+              <Text
+                strong
+                style={{
+                  fontSize: "clamp(2.2vh, 2.8vw, 3.8vh)",
+                  color: "#fff",
+                }}
+              >
+                {condition}
+              </Text>
+            </Space>
           </Col>
         </Row>
       </div>
 
      
-      {parameters.length > 0 && (
+      {(visibility || windSpeed || feelsLike) && (
         <div
           style={{
             background: "#D9E6FF",
-            padding: `${responsiveSize(10, "1.5vh", 16)} ${responsiveSize(12, "2vw", 20)}`,
-            borderRadius: "0 0 12px 12px",
-            fontSize: responsiveSize(11, "1vw", 14),
-            boxShadow: "0 2px 6px rgba(98, 50, 50, 0.1)",
-            minHeight: responsiveSize(60, "8vh", 80),
-            display: "flex",
-            alignItems: "center",
+            padding: "3vh 3vw",
+            borderRadius: "0 0 1rem 1rem",
           }}
         >
-          <Row 
-            justify="space-between" 
-            align="middle" 
-            style={{ width: "100%" }}
-          >
-            {parameters.map((param, i) => {
-              const isFeelsLike = param.label.toLowerCase().includes("feel");
+          <Row justify={centerFeels ? "center" : "space-between"} align="middle">
+            {visibility && !centerFeels && (
+              <Col>
+                <Row gutter={10} align="middle">
+                  <Col>
+                    <PiEyeBold
+                      style={{
+                        color: "#ff4d4f",
+                        fontSize: "clamp(4vh, 4.5vw, 6vh)",
+                        display: "block",
+                      }}
+                    />
+                  </Col>
+                  <Col>
+                    <Text
+                      style={{
+                        fontSize: "clamp(2.5vh, 3vw, 4.5vh)",
+                        color: "#FF3F3F",
+                        display: "block",
+                      }}
+                    >
+                      Low Visibility
+                    </Text>
+                    <Text
+                      style={{
+                        fontSize: "clamp(2.5vh, 3vw, 4.5vh)",
+                        color: "#FF3F3F",
+                        display: "block",
+                      }}
+                    >
+                      (3-broken lines)
+                    </Text>
+                  </Col>
+                </Row>
+              </Col>
+            )}
 
-              return (
-                <Col
-                  key={i}
+            {windSpeed && !centerFeels && (
+              <Col>
+                <Row gutter={10} align="middle">
+                  <Col>
+                    <RiSpeedUpLine
+                      style={{
+                        fontSize: "clamp(4vh, 4.5vw, 6vh)",
+                        color: "#FF3F3F",
+                        display: "block",
+                      }}
+                    />
+                  </Col>
+                  <Col>
+                    <Text
+                      style={{
+                        fontSize: "clamp(2.5vh, 3vw, 4.5vh)",
+                        color: "#FF3F3F",
+                        display: "block",
+                      }}
+                    >
+                      45-60
+                    </Text>
+                    <Text
+                      style={{
+                        fontSize: "clamp(2.5vh, 3vw, 4.5vh)",
+                        color: "#FF3F3F",
+                      }}
+                    >
+                      km/h
+                    </Text>
+                  </Col>
+                </Row>
+              </Col>
+            )}
+
+            {feelsLike && (
+              <Col>
+                <Text
+                  strong
                   style={{
-                    textAlign: isFeelsLike ? "center" : "left",
-                    flex: isFeelsLike ? "1 0 100%" : "0 1 auto",
-                    marginBottom: isFeelsLike ? responsiveSize(4, "1vh", 8) : "0",
+                    fontSize: "clamp(2.8vh, 3.2vw, 4.8vh)",
+                    color: "#000E2A",
                   }}
                 >
-                  <Row align="middle" gutter={6} wrap={false}>
-                    <Col>
-                      {param.icon === "eye" && (
-                        <PiEyeBold style={{ 
-                          color: "#ff4d4f", 
-                          fontSize: responsiveSize(18, "2vw", 22)
-                        }} />
-                      )}
-                      {param.icon === "wind" && (
-                        <RiSpeedUpLine
-                          style={{ 
-                            color: "#ff4d4f", 
-                            fontSize: responsiveSize(18, "2vw", 22)
-                          }}
-                        />
-                      )}
-                    </Col>
-                    <Col>
-                      <Text
-                        style={{
-                          fontSize: responsiveSize(13, "1.5vw", 18),
-                          color: isFeelsLike ? "blue" : "#FF3F3F",
-                          whiteSpace: "nowrap",
-                        }}
-                      >
-                        {param.label}: {param.value} {param.unit}
-                      </Text>
-                    </Col>
-                  </Row>
-                </Col>
-              );
-            })}
+                  Feels like: {feelsLike}
+                </Text>
+              </Col>
+            )}
           </Row>
         </div>
       )}

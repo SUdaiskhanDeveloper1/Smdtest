@@ -5,85 +5,66 @@ import c from "../assets/c.svg";
 
 const { Text } = Typography;
 
-const clamp = (min: number, preferred: string, max: number): string => {
-  return `clamp(${min}px, ${preferred}, ${max}px)`;
-};
-
 const Header: React.FC = () => {
   return (
-    <div
+    <Row
+      justify="space-between"
+      align="middle"
       style={{
-        width: "100vw",
-        maxWidth: "100%",
-        minHeight: "10vw",
-        maxHeight: "130%",
-        padding: "0 clamp(0.5rem, 2vw, 1rem)",
+        flex: "0 0 auto",
+        marginBottom: "1vh",
+        marginTop: "0vh",
       }}
     >
-      <Row
-        justify="space-between"
-        align="middle"
-        style={{
-          background: "white",
-          padding: "clamp(0.6rem, 1.5vh, 1rem)",
-          marginBottom: "clamp(0.99rem, 1vh, 0.5rem)",
-          borderRadius: "8px",
-          boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-        }}
-      >
-        <Col>
-          <Space style={{ gap: clamp(12, "2vw", 34) }}>
-            <img
-              src={a}
-              alt="Logo"
-              style={{
-                height: "clamp(78px, 4vw, 38px)",
-                borderRadius: 6,
-                objectFit: "inherit",
-              }}
-            />
-            <img
-              src={c}
-              alt="Logo"
-              style={{
-                width: "clamp(280px, 20vw, 298px)",
-
-                borderRadius: 6,
-                objectFit: "fill",
-              }}
-            />
-          </Space>
-        </Col>
-        <Col>
-          <Space
-            direction="vertical"
+      <Col>
+        <div style={{ display: "flex", gap: "3vw", alignItems: "center" }}>
+          <img
+            src={a}
+            alt="Logo"
             style={{
-              lineHeight: 1,
-              gap: 0,
+              height: "clamp(8vh, 10vw, 14vh)",
+              borderRadius: 8,
+              objectFit: "cover",
+            }}
+          />
+          <img
+            src={c}
+            alt="Logo"
+            style={{
+              width: "clamp(45vw, 50vw, 60vw)",
+              borderRadius: 8,
+              objectFit: "contain",
+            }}
+          />
+        </div>
+      </Col>
+      <Col>
+        <Space direction="vertical" align="end" size={0}>
+          <Text
+            style={{
+              fontSize: "clamp(1.5vh, 2.5vw, 3vh)",
+              color: "black",
+              fontWeight: 600,
+              whiteSpace: "normal",
+              wordBreak: "break-word",
             }}
           >
-            <Text
-              style={{
-                fontSize: "clamp(12px, 1.3vw, 10px)",
-                color: "black",
-                fontWeight: 500,
-              }}
-            >
-              11:30 AM
-            </Text>
-            <Text
-              style={{
-                fontSize: "clamp(11px, 1.3vw, 10px)",
-                color: "black",
-                fontWeight: 500,
-              }}
-            >
-              02 Sep
-            </Text>
-          </Space>
-        </Col>
-      </Row>
-    </div>
+            04:23 PM
+          </Text>
+          <Text
+            style={{
+              fontSize: "clamp(1.5vh, 2.5vw, 3vh)",
+              color: "black",
+              fontWeight: 600,
+              whiteSpace: "normal",
+              wordBreak: "break-word",
+            }}
+          >
+            26 Sep
+          </Text>
+        </Space>
+      </Col>
+    </Row>
   );
 };
 
